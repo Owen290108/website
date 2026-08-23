@@ -4,25 +4,101 @@ class HomeController {
 
     // =========================
     // TRANG CHỦ
+    // MỖI TRANG 3 BÀI VIẾT
     // =========================
     home(req, res, next) {
-        Blog.find({})
-            .lean()
-            .then(blogs => {
+
+        // Lấy số trang từ URL
+        // Ví dụ: /?page=2
+        const page = parseInt(req.query.page) || 1;
+
+        // Mỗi trang hiển thị 3 bài
+        const limit = 3;
+
+        // Tính số bài cần bỏ qua
+        const skip = (page - 1) * limit;
+
+        Promise.all([
+
+            // Lấy 3 bài của trang hiện tại
+            Blog.find({})
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit)
+                .lean(),
+
+            // Đếm tổng số bài viết
+            Blog.countDocuments({})
+
+        ])
+            .then(([blogs, totalBlogs]) => {
 
                 // Chuyển ngày tháng sang định dạng Việt Nam
                 blogs.forEach(blog => {
+
                     if (blog.createdAt) {
+
                         blog.createdAt = new Date(blog.createdAt)
                             .toLocaleDateString('vi-VN', {
                                 day: '2-digit',
                                 month: '2-digit',
                                 year: 'numeric'
                             });
+
                     }
+
                 });
 
-                res.render('home', { blogs });
+
+                // =========================
+                // TÍNH TỔNG SỐ TRANG
+                // =========================
+
+                const totalPages = Math.ceil(
+                    totalBlogs / limit
+                );
+
+
+                // =========================
+                // TRANG TRƯỚC
+                // =========================
+
+                const previousPage = page > 1
+                    ? page - 1
+                    : null;
+
+
+                // =========================
+                // TRANG SAU
+                // =========================
+
+                const nextPage = page < totalPages
+                    ? page + 1
+                    : null;
+
+
+                // =========================
+                // HIỂN THỊ TRANG CHỦ
+                // =========================
+
+                res.render('home', {
+
+                    blogs,
+
+                    // Trang hiện tại
+                    currentPage: page,
+
+                    // Tổng số trang
+                    totalPages,
+
+                    // Trang trước
+                    previousPage,
+
+                    // Trang sau
+                    nextPage
+
+                });
+
             })
             .catch(next);
     }
@@ -47,12 +123,14 @@ class HomeController {
 
                 // Chuyển ngày tạo sang định dạng Việt Nam
                 if (blog.createdAt) {
+
                     blog.createdAtVN = new Date(blog.createdAt)
                         .toLocaleDateString('vi-VN', {
                             day: '2-digit',
                             month: '2-digit',
                             year: 'numeric'
                         });
+
                 }
 
                 res.render('detail', {
