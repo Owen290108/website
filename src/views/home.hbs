@@ -1,20 +1,23 @@
-
 <div class="hero">
+
     <div class="container">
 
         <div class="left">
 
             <h1 class="h1">
-                Chào , chúng tôi là <b>sì pai đờ &nbsp; men</b>.
-                <br>Hành tình của những động màn 
+                Chào, chúng tôi là <b>sì pai đờ &nbsp; men</b>.
+                <br>
+                Hành tình của những động màn
             </h1>
 
             <p class="h3">
-                Hành tinh của nhưng S.v <abbr title="Accessibility">a11y</abbr>
+                Hành tinh của nhưng S.v
+                <abbr title="Accessibility">a11y</abbr>
                 và những đòng bọn
             </p>
 
             <div>
+
                 <a href="/contact" class="btn btn-primary">
                     Liên Hệ Về Tôi
                 </a>
@@ -22,6 +25,7 @@
                 <a href="/about" class="btn btn-secondary">
                     Về Tôi
                 </a>
+
             </div>
 
         </div>
@@ -32,16 +36,25 @@
             <div class="pattern-bg"></div>
 
             <div class="img-box">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsZyTTWBU8YZsSPs2E3tuCrWWilAIT2-Ylmqu7o728yg&s=10" alt="Julia Walker" class="hero-img">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsZyTTWBU8YZsSPs2E3tuCrWWilAIT2-Ylmqu7o728yg&s=10"
+                    alt="Julia Walker"
+                    class="hero-img"
+                >
 
                 <div class="shape shape-1"></div>
+
                 <div class="shape shape-2"></div>
+
             </div>
 
         </div>
 
     </div>
+
 </div>
+
 
 
 
@@ -50,12 +63,15 @@
     <div class="container">
 
 
+        <!-- =========================
+             BLOG
+        ========================== -->
+
         <div class="blog">
 
             <h2 class="h2">
                 Latest Blog Post
             </h2>
-
 
 
             <div class="blog-card-group">
@@ -64,24 +80,34 @@
                 {{#each blogs}}
 
 
+                <!-- =========================
+                     BLOG CARD
+                ========================== -->
+
                 <div class="blog-card">
 
 
+                    <!-- ẢNH BÀI VIẾT -->
+
                     <div class="blog-card-banner">
 
-                        <img 
-                            src="{{this.image}}" 
-                            alt="{{this.name}}" 
+                        <img
+                            src="{{this.image}}"
+                            alt="{{this.name}}"
                             width="250"
-                            class="blog-banner-img">
+                            class="blog-banner-img"
+                        >
 
                     </div>
 
 
 
+                    <!-- NỘI DUNG -->
 
                     <div class="blog-content-wrapper">
 
+
+                        <!-- CHỦ ĐỀ -->
 
                         <button class="blog-topic text-tiny">
                             Blog
@@ -89,9 +115,14 @@
 
 
 
+                        <!-- TIÊU ĐỀ -->
+
                         <h3>
 
-                            <a href="/blogs/{{this.slug}}" class="h3">
+                            <a
+                                href="/blogs/{{this.slug}}"
+                                class="h3"
+                            >
 
                                 {{this.name}}
 
@@ -101,6 +132,7 @@
 
 
 
+                        <!-- MÔ TẢ -->
 
                         <p class="blog-text">
 
@@ -110,11 +142,9 @@
 
 
 
+                        <!-- THÔNG TIN -->
 
                         <div class="wrapper-flex">
-
-
-
 
 
                             <div class="wrapper">
@@ -123,7 +153,6 @@
                                 <a href="#" class="h4">
                                     Admin
                                 </a>
-
 
 
                                 <p class="text-sm">
@@ -143,23 +172,34 @@
                         </div>
 
 
+
                         <!-- =========================
                              SỬA / XÓA BÀI VIẾT
                         ========================== -->
 
                         <div class="blog-card-actions">
 
+
+                            <!-- SỬA -->
+
                             <a
                                 href="/blogs/{{this._id}}/edit"
                                 class="blog-action-btn edit"
                             >
 
-                                <ion-icon name="create-outline"></ion-icon>
+                                <ion-icon
+                                    name="create-outline"
+                                ></ion-icon>
 
-                                <span>Sửa</span>
+                                <span>
+                                    Sửa
+                                </span>
 
                             </a>
 
+
+
+                            <!-- XÓA -->
 
                             <form
                                 method="POST"
@@ -172,13 +212,18 @@
                                     class="blog-action-btn delete"
                                 >
 
-                                    <ion-icon name="trash-outline"></ion-icon>
+                                    <ion-icon
+                                        name="trash-outline"
+                                    ></ion-icon>
 
-                                    <span>Xóa</span>
+                                    <span>
+                                        Xóa
+                                    </span>
 
                                 </button>
 
                             </form>
+
 
                         </div>
 
@@ -196,11 +241,68 @@
 
 
 
+            <!-- =========================
+                 PHÂN TRANG
+                 3 BÀI / TRANG
+            ========================== -->
 
-            <button class="btn load-more">
-                Load More
-            </button>
+            {{#if totalPages}}
 
+            <div class="blog-pagination">
+
+
+                <!-- =========================
+                     QUAY LẠI
+                ========================== -->
+
+                {{#if previousPage}}
+
+                    <a
+                        href="/?page={{previousPage}}"
+                        class="pagination-btn"
+                    >
+
+                        ← Quay lại
+
+                    </a>
+
+                {{/if}}
+
+
+
+                <!-- =========================
+                     SỐ TRANG
+                ========================== -->
+
+                <span class="pagination-info">
+
+                    Trang {{currentPage}} / {{totalPages}}
+
+                </span>
+
+
+
+                <!-- =========================
+                     ĐI TIẾP
+                ========================== -->
+
+                {{#if nextPage}}
+
+                    <a
+                        href="/?page={{nextPage}}"
+                        class="pagination-btn"
+                    >
+
+                        Đi tiếp →
+
+                    </a>
+
+                {{/if}}
+
+
+            </div>
+
+            {{/if}}
 
 
         </div>
@@ -208,9 +310,16 @@
 
 
 
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
 
         <div class="aside">
 
+
+            <!-- =========================
+                 TOPICS
+            ========================== -->
 
             <div class="topics">
 
@@ -222,7 +331,11 @@
                 <a href="#" class="topic-btn">
 
                     <div class="icon-box">
-                        <ion-icon name="server-outline"></ion-icon>
+
+                        <ion-icon
+                            name="server-outline"
+                        ></ion-icon>
+
                     </div>
 
                     <p>
@@ -236,7 +349,11 @@
                 <a href="#" class="topic-btn">
 
                     <div class="icon-box">
-                        <ion-icon name="accessibility-outline"></ion-icon>
+
+                        <ion-icon
+                            name="accessibility-outline"
+                        ></ion-icon>
+
                     </div>
 
                     <p>
@@ -250,7 +367,11 @@
                 <a href="#" class="topic-btn">
 
                     <div class="icon-box">
-                        <ion-icon name="rocket-outline"></ion-icon>
+
+                        <ion-icon
+                            name="rocket-outline"
+                        ></ion-icon>
+
                     </div>
 
                     <p>
@@ -265,6 +386,9 @@
 
 
 
+            <!-- =========================
+                 TAGS
+            ========================== -->
 
             <div class="tags">
 
@@ -275,29 +399,37 @@
 
                 <div class="wrapper">
 
+
                     <button class="hashtag">
                         #mongodb
                     </button>
+
 
                     <button class="hashtag">
                         #nodejs
                     </button>
 
+
                     <button class="hashtag">
                         #a11y
                     </button>
+
 
                     <button class="hashtag">
                         #webperf
                     </button>
 
-                </div>
 
+                </div>
 
             </div>
 
 
 
+
+            <!-- =========================
+                 CONTACT
+            ========================== -->
 
             <div class="contact">
 
@@ -312,15 +444,16 @@
                         Do you want to learn more about how I can help your company overcome problems?
                     </p>
 
-
                 </div>
-
 
             </div>
 
 
 
 
+            <!-- =========================
+                 NEWSLETTER
+            ========================== -->
 
             <div class="newsletter">
 
@@ -338,33 +471,35 @@
 
                     <form action="#">
 
-                        <input 
+                        <input
                             type="email"
                             name="email"
                             placeholder="Email Address"
-                            required>
+                            required
+                        >
 
 
-                        <button type="submit" class="btn btn-primary">
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+
                             Subscribe
-                        </button>
 
+                        </button>
 
                     </form>
 
 
                 </div>
 
-
             </div>
-
 
 
         </div>
 
 
-
     </div>
 
-
 </div>
+
