@@ -29,6 +29,42 @@ class HomeController {
 
 
     // =========================
+    // TRANG CHI TIẾT BÀI VIẾT
+    // =========================
+    show(req, res, next) {
+
+        Blog.findOne({
+            slug: req.params.slug
+        })
+            .lean()
+            .then(blog => {
+
+                if (!blog) {
+                    return res.status(404).send(
+                        'Không tìm thấy bài viết'
+                    );
+                }
+
+                // Chuyển ngày tạo sang định dạng Việt Nam
+                if (blog.createdAt) {
+                    blog.createdAtVN = new Date(blog.createdAt)
+                        .toLocaleDateString('vi-VN', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                        });
+                }
+
+                res.render('show', {
+                    blog
+                });
+
+            })
+            .catch(next);
+    }
+
+
+    // =========================
     // TRANG GIỚI THIỆU
     // =========================
     about(req, res) {
