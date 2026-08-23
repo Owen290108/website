@@ -55,7 +55,7 @@ class HomeController {
                         });
                 }
 
-                res.render('show', {
+                res.render('detail', {
                     blog
                 });
 
