@@ -3,71 +3,130 @@
 <div class="container py-5">
     <div class="row justify-content-center g-4">
 
-        <!-- Nội dung bài viết -->
+        <!-- =========================
+             NỘI DUNG BÀI VIẾT
+             ========================= -->
         <div class="col-lg-8">
 
             <article class="blog-detail-card">
 
-                <!-- Ảnh bài viết -->
+                <!-- =========================
+                     ẢNH BÀI VIẾT
+                     ========================= -->
+                {{#if blog.image}}
                 <div class="blog-image-wrapper">
                     <img src="{{blog.image}}"
                          alt="{{blog.name}}"
                          class="blog-main-image">
                 </div>
+                {{/if}}
+
 
                 <div class="blog-content-wrapper">
 
-                    <!-- Tiêu đề -->
+                    <!-- =========================
+                         TIÊU ĐỀ
+                         ========================= -->
                     <div class="blog-header">
+
                         <h1 class="blog-title">
                             {{blog.name}}
                         </h1>
 
+                        <!-- =========================
+                             NGÀY ĐĂNG
+                             ========================= -->
                         <div class="blog-meta">
+
                             <i class="bi bi-calendar3"></i>
+
                             <span>
-                                Ngày đăng: {{dateFormat blog.createdAt "DD/MM/YYYY"}}
+                                Ngày đăng:
+                                {{dateFormat blog.createdAt "DD/MM/YYYY"}}
                             </span>
+
                         </div>
+
                     </div>
+
 
                     <hr class="blog-divider">
 
-                    <!-- Nội dung bài viết -->
+
+                    <!-- =========================
+                         MÔ TẢ BÀI VIẾT
+                         ========================= -->
+                    {{#if blog.description}}
+
+                    <div class="blog-description">
+
+                        <div class="description-title">
+                            <i class="bi bi-info-circle"></i>
+                            Giới thiệu
+                        </div>
+
+                        <div class="description-content">
+                            {{{blog.description}}}
+                        </div>
+
+                    </div>
+
+                    {{/if}}
+
+
+                    <!-- =========================
+                         NỘI DUNG BÀI VIẾT
+                         ========================= -->
                     <div class="blog-detail-content">
+
                         {{{blog.currentContent}}}
+
                     </div>
 
 
                     <!-- =========================
                          PHÂN TRANG BÀI VIẾT
                          ========================= -->
-
                     {{#if blog.totalPages}}
 
                     <div class="blog-pagination">
 
                         <!-- QUAY LẠI -->
                         {{#if blog.previousPage}}
+
                             <a href="/blogs/{{blog.slug}}?page={{blog.previousPage}}"
                                class="pagination-btn">
-                                ← Quay lại
+
+                                <i class="bi bi-arrow-left"></i>
+                                Quay lại
+
                             </a>
+
                         {{/if}}
 
 
                         <!-- SỐ TRANG -->
                         <span class="pagination-info">
-                            Trang {{blog.currentPage}} / {{blog.totalPages}}
+
+                            Trang
+                            {{blog.currentPage}}
+                            /
+                            {{blog.totalPages}}
+
                         </span>
 
 
                         <!-- ĐI TIẾP -->
                         {{#if blog.nextPage}}
+
                             <a href="/blogs/{{blog.slug}}?page={{blog.nextPage}}"
                                class="pagination-btn">
-                                Đi tiếp →
+
+                                Đi tiếp
+                                <i class="bi bi-arrow-right"></i>
+
                             </a>
+
                         {{/if}}
 
                     </div>
@@ -81,26 +140,42 @@
         </div>
 
 
-        <!-- Sidebar tác giả -->
+
+        <!-- =========================
+             SIDEBAR TÁC GIẢ
+             ========================= -->
         <div class="col-lg-4">
 
             <div class="author-card">
 
+                <!-- AVATAR -->
                 <div class="author-avatar">
+
                     <i class="bi bi-person-fill"></i>
+
                 </div>
 
+
+                <!-- TÊN -->
                 <h5 class="author-name">
                     Admin
                 </h5>
 
+
+                <!-- CHỨC VỤ -->
                 <p class="author-role">
                     Người quản trị website
                 </p>
 
-                <a href="/contact" class="author-contact-btn">
+
+                <!-- LIÊN HỆ -->
+                <a href="/contact"
+                   class="author-contact-btn">
+
                     <i class="bi bi-envelope"></i>
+
                     Liên hệ
+
                 </a>
 
             </div>
@@ -113,25 +188,49 @@
 
 {{else}}
 
+
+<!-- =========================
+     KHÔNG TÌM THẤY BÀI VIẾT
+     ========================= -->
+
 <div class="container py-5">
+
     <div class="not-found-card">
 
+        <!-- ICON -->
         <div class="not-found-icon">
+
             <i class="bi bi-file-earmark-x"></i>
+
         </div>
 
-        <h2>Không tìm thấy bài viết</h2>
 
+        <!-- TIÊU ĐỀ -->
+        <h2>
+            Không tìm thấy bài viết
+        </h2>
+
+
+        <!-- MÔ TẢ -->
         <p>
-            Bài viết bạn đang tìm kiếm không tồn tại hoặc đã được xóa.
+            Bài viết bạn đang tìm kiếm không tồn tại
+            hoặc đã được xóa.
         </p>
 
-        <a href="/" class="not-found-btn">
+
+        <!-- VỀ TRANG CHỦ -->
+        <a href="/"
+           class="not-found-btn">
+
             <i class="bi bi-house"></i>
+
             Về trang chủ
+
         </a>
 
     </div>
+
 </div>
+
 
 {{/if}}
