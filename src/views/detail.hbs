@@ -25,16 +25,54 @@
 
                         <div class="blog-meta">
                             <i class="bi bi-calendar3"></i>
-                            <span>Ngày đăng: {{blog.createdAtVN}}</span>
+                            <span>
+                                Ngày đăng: {{dateFormat blog.createdAt "DD/MM/YYYY"}}
+                            </span>
                         </div>
                     </div>
 
                     <hr class="blog-divider">
 
-                    <!-- Nội dung -->
+                    <!-- Nội dung bài viết -->
                     <div class="blog-detail-content">
-                        {{{blog.description}}}
+                        {{{blog.currentContent}}}
                     </div>
+
+
+                    <!-- =========================
+                         PHÂN TRANG BÀI VIẾT
+                         ========================= -->
+
+                    {{#if blog.totalPages}}
+
+                    <div class="blog-pagination">
+
+                        <!-- QUAY LẠI -->
+                        {{#if blog.previousPage}}
+                            <a href="/blogs/{{blog.slug}}?page={{blog.previousPage}}"
+                               class="pagination-btn">
+                                ← Quay lại
+                            </a>
+                        {{/if}}
+
+
+                        <!-- SỐ TRANG -->
+                        <span class="pagination-info">
+                            Trang {{blog.currentPage}} / {{blog.totalPages}}
+                        </span>
+
+
+                        <!-- ĐI TIẾP -->
+                        {{#if blog.nextPage}}
+                            <a href="/blogs/{{blog.slug}}?page={{blog.nextPage}}"
+                               class="pagination-btn">
+                                Đi tiếp →
+                            </a>
+                        {{/if}}
+
+                    </div>
+
+                    {{/if}}
 
                 </div>
 
