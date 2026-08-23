@@ -1,9 +1,10 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-// Định nghĩa Schema cho Blog
+// =========================
+// ĐỊNH NGHĨA SCHEMA CHO BLOG
+// =========================
 const Blog = new Schema({
 
     name: {
@@ -16,11 +17,6 @@ const Blog = new Schema({
         maxLength: 600
     },
 
-    // Nội dung chi tiết bài viết
-    content: {
-        type: String
-    },
-
     image: {
         type: String,
         maxLength: 255
@@ -31,11 +27,13 @@ const Blog = new Schema({
         maxLength: 255
     },
 
+    // Ngày tạo bài viết
     createdAt: {
         type: Date,
         default: Date.now
     },
 
+    // Ngày cập nhật bài viết
     updatedAt: {
         type: Date,
         default: Date.now
@@ -44,5 +42,7 @@ const Blog = new Schema({
 });
 
 
-// Xuất Model
+// =========================
+// XUẤT MODEL
+// =========================
 module.exports = mongoose.model('Blog', Blog);
